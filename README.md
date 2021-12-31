@@ -40,8 +40,9 @@ For all those graphs the dataframes could also be asked with get_df_from_search(
 - group_by_yearmonth_data(frame=data,target_column_name="AEP_MW",column_date_name="Datetime",mode="yearmonth")
 ![image](https://user-images.githubusercontent.com/61083270/147839117-2048a69d-96c8-436a-acd4-f0310947ab5d.png)
 group_by_yearmonth_data(frame=data,target_column_name="AEP_MW",column_date_name="Datetime",mode="yearmonth_bymonth")
+With those parameters, all the data by month is extracted 
 ![image](https://user-images.githubusercontent.com/61083270/147839133-900ad8c1-668c-4fa1-9f09-b10475c328cd.png)
-With those parameters, all the data by month is extracted
+With those parameters, all the data by month is extracted but sorted 
 group_by_yearmonth_data(frame=data,target_column_name="AEP_MW",column_date_name="Datetime",mode="yearmonth_bymonth",month="11")
 ![image](https://user-images.githubusercontent.com/61083270/147839159-ebe5099c-d95f-4ef7-9f78-fb4f24cb7fdb.png)
 
