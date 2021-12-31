@@ -29,7 +29,7 @@ date1 is only used if the inteval mode selector wants to be used. date1 is set b
 #### - show_graph(date0="2005-01-01", frame=data, target_column_name="AEP_MW", column_date_name="Datetime")
 ![image](https://user-images.githubusercontent.com/61083270/147823315-0c9e8e05-765b-481c-91a6-c5acd70ad78e.png)
 
-For all those graphs the dataframes could also be asked with get_df_from_search() adding the same arguments. For more information about the entry arguments explore function.__doc__ at the command window.
+For all those graphs the dataframes could also be asked with get_df_from_search() adding the same arguments as show_graph function. For more information about the entry arguments explore function.__doc__ at the command window.
 # Requirements
 This module is developed with Python 3.9 (should not be any problems).
 # Packages
