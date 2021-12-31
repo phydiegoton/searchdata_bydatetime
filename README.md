@@ -1,0 +1,2 @@
+# searchdata_bydatetime
+This module is  used for datetime analysis of variables. It extracts a variable filtered by date in different ways. You could search by year "2005", year-month "2005-05", complete date like "2005-01-12". The search could be done through two paths, by selection of one date or by selection of an interval (two dates). For this module Datasets needs to be given, with a date varibale in string format, and another target variable to start plotting by date or extract the dataframe by date.
