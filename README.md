@@ -3,12 +3,17 @@ This module is  used for datetime analysis of variables (plotting dates). It ext
 #Usage Instructions
 The module is compound of 5 conected functions. Allows the cutting of the data by different range of dates, but currently only using "-" as separator, like "2021-12-30"
 The functions set up are:
-### - generate_date_columns() This function generates new date columns with different criteria. This functions allows for the future serach of date by diferent ranges.
-### - search_data() This funtion returns two lists, the datetime list and the target variable of analysis.
-### - create_df_from serach() This function creates the df given by the result of the search_data() function. Depending od the range selected de datetime columns is modified.
+### - generate_date_columns()
+This function generates new date columns with different criteria. This functions allows for the future serach of date by diferent ranges.
+### - search_data() 
+This funtion returns two lists, the datetime list and the target variable of analysis.
+### - create_df_from serach() 
+This function creates the df given by the result of the search_data() function. Depending od the range selected de datetime columns is modified.
 ## High level usage functions.
-### - get_df_from_search() This function is made of the above and returns the dataframe of the data searched/selected or selected by interval
-### - show_graph() This fucntions also is made of the above non-high level functions. It make up the plotting of the data selected
+### - get_df_from_search() 
+This function is made of the above and returns the dataframe of the data searched/selected or selected by interval
+### - show_graph() 
+This fucntions also is made of the above non-high level functions. It make up the plotting of the data selected
 # Example:
 ## Using the next dataset:
 ![image](https://user-images.githubusercontent.com/61083270/147823068-7ba693bc-7241-41bc-a703-f72c13d491d6.png)
