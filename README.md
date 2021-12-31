@@ -34,14 +34,17 @@ date1 is only used if the inteval mode selector wants to be used. date1 is set b
 
 For all those graphs the dataframes could also be asked with get_df_from_search() adding the same arguments as show_graph function. For more information about the entry arguments explore function.__doc__ at the command window.
 
-## Function - group_by_yearmonth_data(frame,target_column_name,column_date_name,mode,month="all")
+## Function  group_by_yearmonth_data(frame,target_column_name,column_date_name,mode,month="all")
 - group_by_yearmonth_data(frame=data,target_column_name="AEP_MW",column_date_name="Datetime",mode="year")
 ![image](https://user-images.githubusercontent.com/61083270/147839046-ff1e512c-97bd-4299-8b21-85f0569cccee.png)
+
 - group_by_yearmonth_data(frame=data,target_column_name="AEP_MW",column_date_name="Datetime",mode="yearmonth")
 ![image](https://user-images.githubusercontent.com/61083270/147839117-2048a69d-96c8-436a-acd4-f0310947ab5d.png)
-group_by_yearmonth_data(frame=data,target_column_name="AEP_MW",column_date_name="Datetime",mode="yearmonth_bymonth")
 With those parameters, all the data by month is extracted 
+group_by_yearmonth_data(frame=data,target_column_name="AEP_MW",column_date_name="Datetime",mode="yearmonth_bymonth")
+
 ![image](https://user-images.githubusercontent.com/61083270/147839133-900ad8c1-668c-4fa1-9f09-b10475c328cd.png)
+
 With those parameters, all the data by month is extracted but sorted 
 group_by_yearmonth_data(frame=data,target_column_name="AEP_MW",column_date_name="Datetime",mode="yearmonth_bymonth",month="11")
 ![image](https://user-images.githubusercontent.com/61083270/147839159-ebe5099c-d95f-4ef7-9f78-fb4f24cb7fdb.png)
