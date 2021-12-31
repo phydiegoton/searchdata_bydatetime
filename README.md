@@ -22,7 +22,7 @@ date1 is only use if the inteval mode selector wants to be used. date1 is set by
 ![image](https://user-images.githubusercontent.com/61083270/147823279-994c2e34-f034-41f0-bb38-03ba4f63b9d4.png)
 #### show_graph(date0="2005-01-01", frame=data, target_column_name="AEP_MW", column_date_name="Datetime")
 ![image](https://user-images.githubusercontent.com/61083270/147823315-0c9e8e05-765b-481c-91a6-c5acd70ad78e.png)
-# Requierements
+# Requirements
 This module is developed with Python 3.9 (should not be any problems).
 # Packages
 Packages used in the module are Pandas and Datetime
