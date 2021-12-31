@@ -2,7 +2,7 @@
 This module is  used for datetime analysis of variables (plotting dates). It extracts a variable filtered by date in different ways. You could search by year "2005", year-month "2005-05", complete date like "2005-01-12". The search could be done through two paths, by selection of one date or by selection of an interval (two dates). For this module Datasets needs to be given, with a date variable in string format, and another target variable to start plotting by date or extract the dataframe by date. This module avoids filtering data with masks making the programmimg easier. Also brings up information for studying trends of the evolution of the years data and by months of the year.
 
 # Usage Instructions
-The module is compound of 5 conected functions. Allows cutting off the data by different range of dates, but currently only using "-" as separator, like "2021-12-30"
+The module is compound of six conected functions. Allows cutting off the data by different range of dates, but currently only using "-" as separator, like "2021-12-30"
 The functions set up are:
 ### - generate_date_columns(...)
 This function generates new date columns with different criteria. This functions allows for the future search of date by diferent ranges.
