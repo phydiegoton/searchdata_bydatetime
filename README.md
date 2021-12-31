@@ -9,23 +9,20 @@ The functions set up are:
 ## High level usage functions.
 ### - get_df_from_search() This function is made of the above and returns the dataframe of the data searched/selected or selected by interval
 ### - show_graph() This fucntions also is made of the above non-high level functions. It make up the plotting of the data selected
-### Example of entry arguments: date0: "2008-12-30" , frame=data, target_column_name="Energy Consumption", column_date_name="Datetime", date1: "2009-01-01"
-
+# Example:
+####Initial DataSet:
+![image](https://user-images.githubusercontent.com/61083270/147823068-7ba693bc-7241-41bc-a703-f72c13d491d6.png)
+#### show_graph(date0="2008-12-30" , frame=data, target_column_name="AEP_MW", column_date_name="Datetime", date1: "2009-01-01")
 ![image](https://user-images.githubusercontent.com/61083270/147822950-50f96063-733f-440b-a926-144d9a82bb1f.png)
-
-
-
-
-
 date1 is only use if the inteval mode selector wants to be used. date1 is set by default fro selecting one date by date0
-### Other example of entry arguments date0: "2008-08", frame=data, target_column_name="Energy Consumption", column_date_name="datetime"
-### Other example of entry arguments date0:"2005-08", frame=data, target_column_name="Energy Consumption", column_date_name="datetime",date1="2005-12"
-
-
-
-
+#### show_graph(date0="2008-08", frame=data, target_column_name="AEP_MW", column_date_name="Datetime")
+![image](https://user-images.githubusercontent.com/61083270/147823241-c24a87a9-212d-49a2-a0cc-2c1371193dda.png)
+#### show_graph(date0="2005-08", frame=data, target_column_name="AEP_MW", column_date_name="Datetime",date1="2005-12")
+![image](https://user-images.githubusercontent.com/61083270/147823279-994c2e34-f034-41f0-bb38-03ba4f63b9d4.png)
+#### show_graph(date0="2005-01-01", frame=data, target_column_name="AEP_MW", column_date_name="Datetime")
+![image](https://user-images.githubusercontent.com/61083270/147823315-0c9e8e05-765b-481c-91a6-c5acd70ad78e.png)
 # Requierements
 This module is developed with Python 3.9 (should not be any problems).
 # Packages
 Packages used in the module are Pandas and Datetime
-#
+
