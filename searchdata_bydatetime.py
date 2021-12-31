@@ -17,10 +17,7 @@ Puntos a mejorar:
 import pandas as pd
 from datetime import datetime
 
-data=pd.read_csv("AEP_hourly.csv")
-
-
-    
+import numpy as np   
     
 def generate_date_columns(frame,column_date_name):
     """Doctrising: Esta función añade columnas de  interes a un dataframe existente, las columnas que se operan son de fecha. 
@@ -32,7 +29,8 @@ def generate_date_columns(frame,column_date_name):
     frame["Date_String_"]=frame[column_date_name].apply(lambda x: x.split()[0]) # Nueva columna con solo los datos de fecha (sin horas) str
     frame["Datetime_/Y/M/D_"]=frame["Date_String_"].apply(lambda x : datetime.strptime(x,'%Y-%m-%d'))# Nueva columna con solo datos en fecha (sin horas) datetime
     frame["Year_"]=frame["Date_String_"].apply(lambda x: x[:4]) #Nueva columna, solo con datos de año, str
-    frame["Year_Month_"]=frame["Date_String_"].apply(lambda x: x[:7]) #nueva columna, solo con datos año y mes, str        
+    frame["Year_Month_"]=frame["Date_String_"].apply(lambda x: x[:7]) #nueva columna, solo con datos año y mes, str 
+    frame["Month_"]=frame["Date_String_"].apply(lambda x: x[5:7])       
     if len(frame[column_date_name][0])>10: #Se hace la comporbación del dato incial con un dato (Podría ser interesante hacerlo con todos)  
         frame["Datetime_original"]=frame[column_date_name].apply(lambda x: datetime.strptime(x,'%Y-%m-%d %H:%M:%S'))# nueva columna si los datos recibidos (str) vienen con horas, todo se pasa a datetime
         #Se pasa a datetime para poder ordenar los valores con el siguiente comando
@@ -134,4 +132,82 @@ def get_df_from_search(date0,frame,target_column_name,column_date_name,date1=Fal
     created_dataframe=create_df_from_search(final_data,column_date_name)
     return created_dataframe
            
-            
+def group_by_yearmonth_data(frame,target_column_name,column_date_name,mode:str,month="all"):
+    """Doctrising: Esta función genera dataframes distintos tipos.
+    1) Un data frame agrupado por año con la suma y la media y pct cambio previo -> mode="year"
+    2) Un dataframe agrupado por meses del año con la suma, media y pct cambio -> mode= "yearmonth"
+    3) Un dataframe de los meses de todos los años, es decir agrupa todos los eneros o febreros de los años
+    mode="yearmonth_bymonth"
+    month-> "all" (Para obtener todo los yearmonth ordenados) (Es Default)
+    month-> "xx" Se selecciona el buscado para todos los años"""
+                    
+    assert mode== "year" or "yearmonth"or "yearmonth_bymonth"
+    frame=generate_date_columns(frame, column_date_name)#Se hace uso de las columnas generadas date
+    if mode=="year":  #Para obtener datos totales por año
+        #Obtener la columna sum
+        data_grouped_by_year_sum=frame.groupby("Year_")[target_column_name].apply(sum) 
+        data_grouped_by_year_sum=pd.DataFrame(data_grouped_by_year_sum)
+        data_grouped_by_year_sum.columns=[f"SUM {target_column_name}"]
+        #Obtener el pct change de sum
+        data_grouped_by_year_sum["PCT Change SUM"]=data_grouped_by_year_sum.pct_change()
+        #Obtener la columna mean
+        data_grouped_by_year_mean=frame.groupby("Year_")[target_column_name].apply(np.mean)
+        data_grouped_by_year_mean=pd.DataFrame(data_grouped_by_year_mean)
+        data_grouped_by_year_mean.columns=[f"Mean per hour {target_column_name}"]
+        #Obtener el pct_change de mean
+        data_grouped_by_year_sum["PCT Change Mean"]=data_grouped_by_year_mean.pct_change()
+        #Unir las columnas mean y sum
+        data_grouped_by_year=pd.concat([data_grouped_by_year_sum,data_grouped_by_year_mean],axis=1) 
+        #Modificar el orden de las columnas
+        data_grouped_by_year=data_grouped_by_year[[f"SUM {target_column_name}","PCT Change SUM",f"Mean per hour {target_column_name}","PCT Change Mean"]]
+        return data_grouped_by_year
+    elif mode=="yearmonth" or "yearmonth_bymonth": #Para obtener datos totales por mes del año
+        #Obtener la columna sum
+        data_grouped_by_year_sum=frame.groupby("Year_Month_")[target_column_name].apply(sum) 
+        data_grouped_by_year_sum=pd.DataFrame(data_grouped_by_year_sum)
+        data_grouped_by_year_sum.columns=[f"SUM {target_column_name}"] 
+        #Obtener el pct change de sum
+        data_grouped_by_year_sum["PCT Change SUM"]=data_grouped_by_year_sum.pct_change()
+        #Obtener la columna mean
+        data_grouped_by_year_mean=frame.groupby("Year_Month_")[target_column_name].apply(np.mean)
+        data_grouped_by_year_mean=pd.DataFrame(data_grouped_by_year_mean)
+        data_grouped_by_year_mean.columns=[f"Mean per hour {target_column_name}"]
+        data_grouped_by_year_mean["PCT Change Mean"]=data_grouped_by_year_mean.pct_change()
+        # Se unen las dos columnas
+        data_grouped_by_year=pd.concat([data_grouped_by_year_sum,data_grouped_by_year_mean],axis=1)  
+        #Se edita el nombre de las columnas
+        data_grouped_by_year=data_grouped_by_year[[f"SUM {target_column_name}","PCT Change SUM",f"Mean per hour {target_column_name}","PCT Change Mean"]]
+        if mode=="yearmonth_bymonth": #Para obtener datos totales por mes del año ordenados por mes
+            # Se restablece el indice para operar con los datos de la columna indice
+            data_grouped_by_year=data_grouped_by_year.reset_index()
+            #Se genera la columna Month que servira para ordenar los valores por ella
+            data_grouped_by_year["Month_"]=data_grouped_by_year["Year_Month_"].apply(lambda x: int(x[5:7]))
+            #Se genera la columna Year que servira tambien para ordenar los valores
+            data_grouped_by_year["Year_"]=data_grouped_by_year["Year_Month_"].apply(lambda x: int(x[:4]))
+            #Se ejecuta la ordenación por mes y por año 
+            data_grouped_by_year=data_grouped_by_year.sort_values(by=["Month_","Year_"])
+            data_grouped_by_year.index=data_grouped_by_year["Year_Month_"]
+            #Se borran la variables intermedias del proceso para depurar el dato final
+            del(data_grouped_by_year["Year_Month_"])
+            del(data_grouped_by_year["Month_"])
+            del(data_grouped_by_year["Year_"])
+            #data_grouped_by_year.index=data_grouped_by_year["Year_Month_"].apply(lambda x: datetime.strptime(x,"%Y-%M"))
+            if month=="all": #Para obtener datos totales por mes del año ordenados por mes
+                return data_grouped_by_year
+            else: #Para obtener datos totales por mes del año pero solo de la seleccion del mes
+                assert len(month)==2
+                #Se restablece el indice para operar con sus datos
+                data_grouped_by_year=data_grouped_by_year.reset_index()
+                #Se genera la columna Month a traves de la columna que previamente era indice
+                data_grouped_by_year["Month_"]=data_grouped_by_year["Year_Month_"].apply(lambda x: x[5:7])
+                #Se aplica al dataframe una filtro de mes dado por month
+                data_grouped_by_year=data_grouped_by_year[data_grouped_by_year["Month_"]==month]
+                data_grouped_by_year.index=data_grouped_by_year["Year_Month_"]
+                #Se eliminan las varibles intermedias creadas para depurar el dato final
+                del(data_grouped_by_year["Month_"])
+                del(data_grouped_by_year["Year_Month_"])
+                return data_grouped_by_year
+        else: # Devuelve la ejecución para yearmonth
+            return data_grouped_by_year
+ 
+    
