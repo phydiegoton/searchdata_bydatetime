@@ -34,5 +34,5 @@ This module is developed with Python 3.9 (should not be any problems).
 Packages used in the module are Pandas and Datetime
 # Next version target improvements
 - Enabling selecting by hourly data (if the initial dataset has  hourly dates data). For exmaple select all the "12:00:00" hourly data in the dataset
-- Enebaling formatting a rapid way to extract Semesters, Quarters
+- Enabling formatting a rapid way to extract Semesters, Quarters
 - At some point the code runs with lists, change it to arrays, for a more efficient run.
