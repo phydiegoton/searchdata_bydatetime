@@ -14,6 +14,7 @@ The functions set up are:
 ![image](https://user-images.githubusercontent.com/61083270/147823068-7ba693bc-7241-41bc-a703-f72c13d491d6.png)
 #### show_graph(date0="2008-12-30" , frame=data, target_column_name="AEP_MW", column_date_name="Datetime", date1: "2009-01-01")
 ![image](https://user-images.githubusercontent.com/61083270/147822950-50f96063-733f-440b-a926-144d9a82bb1f.png)
+
 date1 is only use if the inteval mode selector wants to be used. date1 is set by default fro selecting one date by date0
 #### show_graph(date0="2008-08", frame=data, target_column_name="AEP_MW", column_date_name="Datetime")
 ![image](https://user-images.githubusercontent.com/61083270/147823241-c24a87a9-212d-49a2-a0cc-2c1371193dda.png)
