@@ -52,6 +52,7 @@ With those parameters, all the data by month is extracted but sorted
 - group_by_yearmonth_data(frame=data,target_column_name="AEP_MW",column_date_name="Datetime",mode="yearmonth_bymonth",month="11")
 ![image](https://user-images.githubusercontent.com/61083270/147839159-ebe5099c-d95f-4ef7-9f78-fb4f24cb7fdb.png)
 
+
 With those parameters its only extacted the info of the month selected
 
 # Requirements
